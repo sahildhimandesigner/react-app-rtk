@@ -1,27 +1,24 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { ProductListType } from './types'
 import { getProductData } from './ProdcutService'
-
-const initialState: ProductListType = {
-    products: [],
-    error: '',
-};
 
 const productSlice = createSlice({
     name: "prodcut",
-    initialState,
-    reducers: {        
+    initialState: {
+      products: [],
+      loading: true,
+    },
+    reducers: {
     },
     extraReducers: (builder) => {
-        builder
-          .addCase(getProductData.fulfilled, (state, action) => {
-            state.products = action.payload;
-          })
-          .addCase(getProductData.rejected, (state, action) => {
-            state.error = action.error.message;
-          });
-      },
+      builder
+      .addCase(getProductData.pending, (state) => {
+        state.loading = true;
+      })
+      .addCase(getProductData.fulfilled, (state, action) => {
+        state.products = action.payload;
+        state.loading = false;
+      })
+    },
 });
 
-console.log(productSlice, 'productSlice')
 export default productSlice.reducer;

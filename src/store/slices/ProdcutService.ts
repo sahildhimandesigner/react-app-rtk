@@ -1,6 +1,10 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 
-export const getProductData = createAsyncThunk('api1/fetchData', async () => {    
-    const response = await fetch('https://api-generator.retool.com/BsUw6I/data');
+const url = process.env.REACT_APP_URL_APP_URL;
+
+export const getProductData = createAsyncThunk('prodcut/fetchData', async () => {    
+    
+    const response = await fetch(url || '');
+
     return response.json();
 });

@@ -1,19 +1,10 @@
 export type ProductListType = {
     products: Product[];
-    error: string | undefined
+    error: string | undefined;
+    loading: boolean;
   };
   
   export type Product = {
     id: number;
-    name: string;
-  };
-
-  export type ProdcutItemTypeProps = {
-    id: number;
     column: string;
-    description: string;
-    product_name: string;
-    product_image: string;
-    product_price: string;
-    product_category: string;
-  }
+  };

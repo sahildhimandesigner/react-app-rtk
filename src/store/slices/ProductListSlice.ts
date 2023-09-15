@@ -1,5 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { getProductData } from './ProdcutService'
+import { postProductData } from './AddProductService'
 
 const productSlice = createSlice({
     name: "prodcut",
@@ -16,6 +17,10 @@ const productSlice = createSlice({
       })
       .addCase(getProductData.fulfilled, (state, action) => {
         state.products = action.payload;
+        state.loading = false;
+      })
+      .addCase(postProductData.fulfilled, (state, action) => {
+        state.products.push(action as never)
         state.loading = false;
       })
     },

@@ -14,6 +14,7 @@ const AddProduct = () => {
     setFormData(values);
     dispatch(postProductData(formData as FormTypes))
     setSubmitting(false);
+    setFormData(formData)
   }
 
   return (

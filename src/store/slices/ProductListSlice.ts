@@ -30,6 +30,9 @@ const productSlice = createSlice({
         state.loading = false;     
         state.error = action.error.message ?? "An error occurred";;
       })
+      .addCase(searchProduct.pending, (state) => {
+        state.loading = true;
+      })
       .addCase(searchProduct.fulfilled, (state, action) => {
         state.searc_results = action.payload;
         state.loading = false;

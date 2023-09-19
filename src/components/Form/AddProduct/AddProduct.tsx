@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import { useDispatch } from 'react-redux';
 import { AppDispatch } from '../../../store/index'
@@ -8,47 +8,53 @@ import { FormTypes } from './types'
 const AddProduct = () => {
   
   const dispatch = useDispatch<AppDispatch>();
-  const [formData, setFormData] = useState({})
+
+  const initialValues: FormTypes = {
+    product_name: '',
+    product_category: '',
+    description: '',
+    product_price: '',
+    product_image: '',
+  };
+
+  const validate = (values: FormTypes) => {
+    const errors: Partial<FormTypes> = {};
+
+      if (!values.product_name) {
+        Object.assign(errors, {
+          product_name: 'Please enter the product name'
+        });
+      }
+      if (!values.product_category) {
+        Object.assign(errors, {
+          product_category: 'Please enter the category name'
+        });
+      }
+      if (!values.description) {
+        Object.assign(errors, {
+          description: 'Please enter the category name'
+        });
+      }
+      if (!values.product_price) {
+        Object.assign(errors, {
+          product_price: 'Please enter the category name'
+        });
+      }
+
+      return errors;
+  };
 
   const handleSubmit = (values:FormTypes, {setSubmitting}: { setSubmitting: (isSubmitting: boolean) => void}) => { 
-    setFormData(values);
-    dispatch(postProductData(formData as FormTypes))
-    setSubmitting(false);
-    setFormData(formData)
+    dispatch(postProductData(values as FormTypes))
+    setSubmitting(false);    
   }
 
   return (
     <div className='flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8'>
       <div className="sm:mx-auto sm:w-full sm:max-w-sm">
         <Formik
-          initialValues={{ product_name: '', product_category: '', description:'', product_price:'', product_image:''}}
-          
-          validate={values => {
-            const errors = {};
-
-            if (!values.product_name) {
-              Object.assign(errors, {
-                product_name: 'Please enter the product name'
-              });
-            }
-            if (!values.product_category) {
-              Object.assign(errors, {
-                product_category: 'Please enter the category name'
-              });
-            }
-            if (!values.description) {
-              Object.assign(errors, {
-                description: 'Please enter the category name'
-              });
-            }
-            if (!values.product_price) {
-              Object.assign(errors, {
-                product_price: 'Please enter the category name'
-              });
-            }
-
-            return errors;
-          }}
+          initialValues={initialValues}        
+          validate={validate}
           onSubmit={handleSubmit}
         >
           {({ isSubmitting }) => (

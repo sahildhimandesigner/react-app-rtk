@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import { useDispatch } from 'react-redux';
 import { AppDispatch } from '../../../store/index'
@@ -46,7 +46,7 @@ const AddProduct = () => {
 
   const handleSubmit = (values:FormTypes, {setSubmitting}: { setSubmitting: (isSubmitting: boolean) => void}) => { 
     dispatch(postProductData(values as FormTypes))
-    setSubmitting(false);    
+    setSubmitting(false);
   }
 
   return (

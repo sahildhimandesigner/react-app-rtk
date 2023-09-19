@@ -13,7 +13,7 @@ const ProductListing = () => {
 
     const searchHandler = () => {
         const search_query = query.charAt(0).toUpperCase() + query.slice(1)
-        console.log(search_query, 'search_query')
+        
         dispatch(searchProduct(search_query));
     }
 
@@ -21,9 +21,7 @@ const ProductListing = () => {
         return state.productData;
     })
 
-    console.log(query, 'query');
-
-    const item = data.products;
+    const item = query ? data.searc_results : data.products;
 
     const loader = data.loading;
 

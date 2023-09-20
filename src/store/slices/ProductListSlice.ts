@@ -2,6 +2,8 @@ import { createSlice } from "@reduxjs/toolkit";
 import { getProductData } from './ProdcutService'
 import { postProductData } from './AddProductService'
 import { searchProduct } from './SearchProductService'
+import { deleteProductItem } from './RemoveProductService'
+import { ProductListType } from './types'
 
 const productSlice = createSlice({
     name: "prodcut",
@@ -9,8 +11,8 @@ const productSlice = createSlice({
       products: [],
       searc_results: [],
       loading: true,
-      error: null as string | null,
-    },
+      error: null,
+    } as ProductListType,
     reducers: {
     },
     extraReducers: (builder) => {
@@ -38,6 +40,17 @@ const productSlice = createSlice({
         state.loading = false;
       })
       .addCase(searchProduct.rejected, (state, action) => {   
+        state.loading = false;     
+        state.error = action.error.message ?? "An error occurred";;
+      })
+      .addCase(deleteProductItem.pending, (state) => {
+        state.loading = true;
+      })
+      .addCase(deleteProductItem.fulfilled, (state, action) => {        
+        state.products = state.products.filter(product => product.id !== action.payload);
+        state.loading = false;
+      })
+      .addCase(deleteProductItem.rejected, (state, action) => {   
         state.loading = false;     
         state.error = action.error.message ?? "An error occurred";;
       })

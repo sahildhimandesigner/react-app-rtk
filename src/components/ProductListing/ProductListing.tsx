@@ -5,6 +5,7 @@ import Loader from '../Loader/Loader'
 import { AppDispatch } from '../../store/index'
 import { searchProduct } from '../../store/slices/SearchProductService'
 import { Search } from 'components/Search';
+import { deleteProductItem } from '../../store/slices/RemoveProductService'
 
 const ProductListing = () => {
 
@@ -13,7 +14,7 @@ const ProductListing = () => {
     const [query, setQuery] = useState('');
 
     const searchHandler = () => {
-        const search_query = query.charAt(0).toUpperCase() + query.slice(1)
+        const search_query = query.charAt(0) + query.slice(1)
         
         dispatch(searchProduct(search_query));
     }
@@ -25,6 +26,10 @@ const ProductListing = () => {
     const item = query ? data.searc_results : data.products;
 
     const loader = data.loading;
+
+    const deleteProduct = (product_id: number) => {
+        dispatch(deleteProductItem(product_id))
+    }
 
   return (
     <div className="bg-white">
@@ -41,9 +46,9 @@ const ProductListing = () => {
             <h2 className="text-2xl font-bold tracking-tight text-gray-900">Customers also purchased</h2>
             <div className='flex'>
                 <div className="mt-6 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8">
-                    {item.map((product:any) =>{
+                    {item && item.map((product:any) =>{
                         return (
-                        <Product productData={product} />
+                        <Product key={product.id} deleteProduct={deleteProduct} productData={product} />
                         )
                     })}
                 </div>

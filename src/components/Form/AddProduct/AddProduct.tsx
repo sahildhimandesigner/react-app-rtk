@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import { useDispatch } from 'react-redux';
 import { AppDispatch } from '../../../store/index'
@@ -86,34 +86,34 @@ const AddProduct = () => {
                   Product Description
                 </label>
                 <div className="mt-2">
-                    <Field className="block p-2 w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" type="text" name="description" />
+                  <Field className="block p-2 w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" type="text" name="description" as="textarea" />
 
-                    <ErrorMessage className='text-red-600' name="description" component="div" />
+                  <ErrorMessage className='text-red-600' name="description" component="div" />
                 </div>              
               </div>
 
               <div className='mb-5'>
-                    <label className="block text-sm font-medium leading-6 text-gray-900">
-                      Product Price
-                    </label>
-                    <div className="mt-2">
-                        <Field className="block w-full p-2 rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" type="text" name="product_price" as="textarea" />
+                <label className="block text-sm font-medium leading-6 text-gray-900">
+                  Product Price
+                </label>
 
-                        <ErrorMessage className='text-red-600' name="product_price" component="div" />
-                    </div>              
+                <div className="mt-2">
+                  <Field className="block w-full p-2 rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" type="text" name="product_price" />
+
+                  <ErrorMessage className='text-red-600' name="product_price" component="div" />
+                </div>              
               </div>
 
               <div className='mb-5'>
-                    <label className="block text-sm font-medium leading-6 text-gray-900">
-                      Product Image
-                    </label>
-                    <div className="mt-2">
-                        <Field className="block w-full p-2 rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" type="text" name="product_image" />
+                <label className="block text-sm font-medium leading-6 text-gray-900">
+                  Product Image
+                </label>
+                <div className="mt-2">
+                    <Field className="block w-full p-2 rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" type="text" name="product_image" />
 
-                        <ErrorMessage className='text-red-600' name="product_image" component="div" />
-                    </div>              
+                    <ErrorMessage className='text-red-600' name="product_image" component="div" />
+                </div>              
               </div>
-
 
               <button className='flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600' type="submit" disabled={isSubmitting}>
                 Add Product
@@ -126,4 +126,4 @@ const AddProduct = () => {
   )
 }
 
-export default AddProduct
+export default AddProduct;

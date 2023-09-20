@@ -1,14 +1,18 @@
 import React from 'react'
+import { FaTrashAlt } from "react-icons/fa";
 
-const Product = ({productData}:any) => {
-    
+const Product = ({productData, deleteProduct}:any) => {
   return (   
-    <div key={productData.id} className="group relative">
+    <div className="group relative">        
         <h3 className="text-sm mb-4 text-gray-700">
-                <span aria-hidden="true" className="absolute inset-0"></span>
-                {productData.product_name}
+            <span aria-hidden="true" className="absolute inset-0"></span>
+            {productData.product_name}
         </h3>
-        <div className="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-md bg-gray-200 lg:aspect-none group-hover:opacity-75 lg:h-80">    
+
+        <div className="aspect-h-1 items-end flex flex-col aspect-w-1 w-full overflow-hidden rounded-md bg-gray-200 lg:aspect-none group-hover:opacity-75 lg:h-80">    
+            <button className='relative p-4' onClick={() => deleteProduct(productData.id)}>
+              <FaTrashAlt />
+            </button>
             {productData.product_image ? <img className="mx-auto flex-shrink-0 " src={productData.product_image} alt={productData.product_image} /> : <img className="h-full w-full object-cover object-center lg:h-full lg:w-full" src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/No-Image-Placeholder.svg/1665px-No-Image-Placeholder.svg.png" alt="product" />}
         </div>
         

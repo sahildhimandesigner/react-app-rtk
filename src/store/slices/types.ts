@@ -1,7 +1,8 @@
 export type ProductListType = {
     products: Product[];
-    error: string | undefined;
+    error: string | null;
     loading: boolean;
+    searc_results: Product[]
   };
   
   export type Product = {

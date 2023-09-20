@@ -6,6 +6,8 @@ import { AppDispatch } from '../../store/index'
 import { searchProduct } from '../../store/slices/SearchProductService'
 import { Search } from 'components/Search';
 import { deleteProductItem } from '../../store/slices/RemoveProductService'
+import { addToCartItem } from '../../store/slices/ProductListSlice';
+
 
 const ProductListing = () => {
 
@@ -31,6 +33,11 @@ const ProductListing = () => {
         dispatch(deleteProductItem(product_id))
     }
 
+    const addToCart = (product_id:number) => {
+        const filter_product = item.filter((items:any) => items.id === product_id);
+        dispatch(addToCartItem(filter_product));
+    }
+
   return (
     <div className="bg-white">
 
@@ -48,7 +55,12 @@ const ProductListing = () => {
                 <div className="mt-6 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8">
                     {item && item.map((product:any) =>{
                         return (
-                        <Product key={product.id} deleteProduct={deleteProduct} productData={product} />
+                        <Product 
+                            key={product.id} 
+                            deleteProduct={deleteProduct} 
+                            productData={product} 
+                            addToCart={addToCart}
+                            />
                         )
                     })}
                 </div>

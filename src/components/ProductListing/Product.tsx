@@ -1,11 +1,10 @@
 import React from 'react'
 import { FaTrashAlt } from "react-icons/fa";
 
-const Product = ({productData, deleteProduct}:any) => {
+const Product = ({productData, deleteProduct, addToCart}:any) => {
   return (   
     <div className="group relative">        
         <h3 className="text-sm mb-4 text-gray-700">
-            <span aria-hidden="true" className="absolute inset-0"></span>
             {productData.product_name}
         </h3>
 
@@ -23,6 +22,8 @@ const Product = ({productData, deleteProduct}:any) => {
             </div>
             <p className="text-sm font-medium text-gray-900">{productData.product_price}</p>
         </div>
+
+        <button className='mt-3 inline-flex w-full items-center justify-center rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 sm:ml-3 sm:mt-0 sm:w-auto' type='button' onClick={() => addToCart(productData.id)}>Add To Cart</button>
     </div>
   )
 }

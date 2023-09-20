@@ -12,8 +12,12 @@ const productSlice = createSlice({
       searc_results: [],
       loading: true,
       error: null,
+      cartItem: [],
     } as ProductListType,
     reducers: {
+      addToCartItem: (state, action) => {
+        state.cartItem.push(action.payload);
+      }
     },
     extraReducers: (builder) => {
       builder
@@ -46,8 +50,10 @@ const productSlice = createSlice({
       .addCase(deleteProductItem.pending, (state) => {
         state.loading = true;
       })
-      .addCase(deleteProductItem.fulfilled, (state, action) => {        
-        state.products = state.products.filter(product => product.id !== action.payload);
+      .addCase(deleteProductItem.fulfilled, (state, action) => {  
+        const deleteProduct = state.products.filter(product => product.id !== action.payload);
+        state.products = deleteProduct;
+        state.cartItem = deleteProduct;
         state.loading = false;
       })
       .addCase(deleteProductItem.rejected, (state, action) => {   
@@ -57,4 +63,5 @@ const productSlice = createSlice({
     },
 });
 
+export const { addToCartItem } = productSlice.actions;
 export default productSlice.reducer;

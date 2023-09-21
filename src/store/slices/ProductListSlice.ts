@@ -4,6 +4,9 @@ import { postProductData } from './AddProductService'
 import { searchProduct } from './SearchProductService'
 import { deleteProductItem } from './RemoveProductService'
 import { ProductListType } from './types'
+import { stringifyToJson } from '../../helper/stringifyToJson'
+
+const cartItemsFromLocalStorage =  stringifyToJson(localStorage.getItem("cartItems") || "") || [];
 
 const productSlice = createSlice({
     name: "prodcut",
@@ -12,11 +15,12 @@ const productSlice = createSlice({
       searc_results: [],
       loading: true,
       error: null,
-      cartItem: [],
+      cartItem: cartItemsFromLocalStorage,
     } as ProductListType,
     reducers: {
       addToCartItem: (state, action) => {
         state.cartItem.push(action.payload);
+        localStorage.setItem("cartItems", JSON.stringify(state.cartItem))
       }
     },
     extraReducers: (builder) => {
@@ -57,7 +61,7 @@ const productSlice = createSlice({
         state.loading = false;
       })
       .addCase(deleteProductItem.rejected, (state, action) => {   
-        state.loading = false;     
+        state.loading = false;
         state.error = action.error.message ?? "An error occurred";;
       })
     },

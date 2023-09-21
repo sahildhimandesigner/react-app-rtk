@@ -1,5 +1,5 @@
-import React, { useState, useEffect} from 'react'
-import { QuestionMarkCircleIcon, XMarkIcon } from '@heroicons/react/20/solid'
+import React, { useState, useEffect } from 'react'
+import { CheckIcon, ClockIcon, QuestionMarkCircleIcon, XMarkIcon } from '@heroicons/react/20/solid'
 
 const CartItem = () => {
     const [cartItems, setCartItems] = useState([]);
@@ -11,6 +11,8 @@ const CartItem = () => {
           setCartItems(storedItems);
         }        
       }, []);
+
+      console.log(cartItems.length, 'storedItemsString')
 
   return (
     <div className="bg-white">
@@ -81,15 +83,15 @@ const CartItem = () => {
                           </div>
                         </div>
 
-                        {/* <p className="mt-4 flex space-x-2 text-sm text-gray-700">
-                          {item.inStock ? (
+                        <p className="mt-4 flex space-x-2 text-sm text-gray-700">
+                          {item.id ? (
                             <CheckIcon className="h-5 w-5 flex-shrink-0 text-green-500" aria-hidden="true" />
                           ) : (
                             <ClockIcon className="h-5 w-5 flex-shrink-0 text-gray-300" aria-hidden="true" />
                           )}
 
-                          <span>{item.inStock ? 'In stock' : `Ships in ${product.leadTime}`}</span>
-                        </p> */}
+                          <span>{item.id ? 'In stock' : `Ships in ${product.leadTime}`}</span>
+                        </p>
                       </div>
                     </li>
                   )

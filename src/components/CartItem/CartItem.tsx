@@ -1,8 +1,13 @@
 import React, { useState, useEffect } from 'react'
 import { CheckIcon, ClockIcon, QuestionMarkCircleIcon, XMarkIcon } from '@heroicons/react/20/solid'
+import { useSelector } from 'react-redux';
 
 const CartItem = () => {
     const [cartItems, setCartItems] = useState([]);
+
+    const cartItem = useSelector((state:any) => {
+      return state.productData.cartItem
+    })
 
     useEffect(() => {
         const storedItemsString = localStorage.getItem('cartItems');
@@ -11,8 +16,6 @@ const CartItem = () => {
           setCartItems(storedItems);
         }        
       }, []);
-
-      console.log(cartItems.length, 'storedItemsString')
 
   return (
     <div className="bg-white">
@@ -23,8 +26,8 @@ const CartItem = () => {
             <h2 id="cart-heading" className="sr-only">
               Items in your shopping cart
             </h2>
-            {!cartItems.length ? (<h2 className='fs-5'>No Item found in the cart</h2>) : <ul className="divide-y divide-gray-200 border-b border-t border-gray-200">
-              {cartItems.map((product:any) => {
+            {cartItems.length === 0 ? (<h2 className='fs-5'>No Item found in the cart</h2>) : <ul className="divide-y divide-gray-200 border-b border-t border-gray-200">
+              {cartItem.map((product:any) => {
                 return product.map((item:any, productIdx:any) => {
                   return (
                     <li key={item.id} className="flex py-6 sm:py-10">

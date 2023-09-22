@@ -8,3 +8,9 @@ export const stringifyToJson = (str:string) => {
       return null;
     }
   };
+
+  export const randomNumber = () => {
+    return Math.random()
+  }
+
+  export const shippingCost = parseFloat((Math.random() + 5).toFixed(2));

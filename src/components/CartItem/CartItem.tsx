@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { CheckIcon, ClockIcon, QuestionMarkCircleIcon, XMarkIcon } from '@heroicons/react/20/solid'
 import { useSelector } from 'react-redux';
+import { randomNumber, shippingCost } from '../../helper/stringifyToJson'
 
 const CartItem = () => {
     const [price, setPrice] = useState([]);
@@ -17,10 +18,19 @@ const CartItem = () => {
       }));
     }, []);
 
+  
+    const tax_estimation = parseFloat(((randomNumber() + 7).toFixed(2)))
+
     const combine_price = [].concat(...price);
+
     const single_price = combine_price.map((price:string) => price.replace(/\$/g, ''))
+
     const get_numbers = single_price.map((str) => parseFloat(str));
+
     const sub_total = get_numbers.reduce((accumulator, currentValue) => accumulator + currentValue, 0);
+
+    const order_total = sub_total + shippingCost + tax_estimation;
+
   
   return (
     <div className="bg-white">
@@ -133,7 +143,7 @@ const CartItem = () => {
                     <QuestionMarkCircleIcon className="h-5 w-5" aria-hidden="true" />
                   </a>
                 </dt>
-                <dd className="text-sm font-medium text-gray-900">$5.00</dd>
+                <dd className="text-sm font-medium text-gray-900">${shippingCost}</dd>
               </div>
               <div className="flex items-center justify-between border-t border-gray-200 pt-4">
                 <dt className="flex text-sm text-gray-600">
@@ -143,11 +153,11 @@ const CartItem = () => {
                     <QuestionMarkCircleIcon className="h-5 w-5" aria-hidden="true" />
                   </a>
                 </dt>
-                <dd className="text-sm font-medium text-gray-900">$8.32</dd>
+                <dd className="text-sm font-medium text-gray-900">${tax_estimation} </dd>
               </div>
               <div className="flex items-center justify-between border-t border-gray-200 pt-4">
                 <dt className="text-base font-medium text-gray-900">Order total</dt>
-                <dd className="text-base font-medium text-gray-900">$112.32</dd>
+                <dd className="text-base font-medium text-gray-900">${order_total}</dd>
               </div>
             </dl>
 

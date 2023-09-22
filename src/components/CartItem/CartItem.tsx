@@ -1,12 +1,27 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { CheckIcon, ClockIcon, QuestionMarkCircleIcon, XMarkIcon } from '@heroicons/react/20/solid'
 import { useSelector } from 'react-redux';
 
 const CartItem = () => {
+    const [price, setPrice] = useState([]);
+
     const cartItem = useSelector((state:any) => {
-      return state.productData.cartItem
+      return state.productData.cartItem;
     })
 
+    useEffect(() => {
+      setPrice(cartItem.map((item:any) => {
+        return item.map((price:any) => {
+          return price.product_price;
+        })
+      }));
+    }, []);
+
+    const combine_price = [].concat(...price);
+    const single_price = combine_price.map((price:string) => price.replace(/\$/g, ''))
+    const get_numbers = single_price.map((str) => parseFloat(str));
+    const sub_total = get_numbers.reduce((accumulator, currentValue) => accumulator + currentValue, 0);
+  
   return (
     <div className="bg-white">
       <div className="mx-auto max-w-2xl px-4 pb-24 pt-16 sm:px-6 lg:max-w-7xl lg:px-8">
@@ -108,7 +123,7 @@ const CartItem = () => {
             <dl className="mt-6 space-y-4">
               <div className="flex items-center justify-between">
                 <dt className="text-sm text-gray-600">Subtotal</dt>
-                <dd className="text-sm font-medium text-gray-900">$99.00</dd>
+                <dd className="text-sm font-medium text-gray-900">${sub_total ? sub_total : ''}</dd>
               </div>
               <div className="flex items-center justify-between border-t border-gray-200 pt-4">
                 <dt className="flex items-center text-sm text-gray-600">

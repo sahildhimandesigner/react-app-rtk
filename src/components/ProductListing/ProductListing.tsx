@@ -10,14 +10,11 @@ import { addToCartItem } from '../../store/slices/ProductListSlice';
 
 
 const ProductListing = () => {
-
     const dispatch = useDispatch<AppDispatch>();
-
     const [query, setQuery] = useState('');
 
     const searchHandler = () => {
-        const search_query = query.charAt(0) + query.slice(1)
-        
+        const search_query = query.charAt(0) + query.slice(1)        
         dispatch(searchProduct(search_query));
     }
 
@@ -40,7 +37,6 @@ const ProductListing = () => {
 
   return (
     <div className="bg-white">
-
         <Search 
             buttonLable="Search" 
             value={query} 

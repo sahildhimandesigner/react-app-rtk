@@ -4,8 +4,6 @@ import { FaTrashAlt } from "react-icons/fa";
 const Product = ({productData, deleteProduct, addToCart}:any) => {
   return (   
     <div className="group relative">        
-        
-
         <div className="aspect-h-1 items-end flex flex-col aspect-w-1 w-full overflow-hidden rounded-md bg-gray-200 lg:aspect-none group-hover:opacity-75 lg:h-80">    
             <div className='items-end flex flex-row justify-between w-full px-2'>
               <h3 className="text-sm mb-4 text-gray-700">

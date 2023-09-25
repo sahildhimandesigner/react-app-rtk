@@ -1,5 +1,6 @@
 import React from 'react'
 import { FaTrashAlt } from "react-icons/fa";
+import { Link } from 'react-router-dom';
 
 const Product = ({productData, deleteProduct, addToCart}:any) => {
   return (   
@@ -13,7 +14,10 @@ const Product = ({productData, deleteProduct, addToCart}:any) => {
                 <FaTrashAlt />
               </button>
             </div>
-            {productData.product_image ? <img className="mx-auto flex-shrink-0 " src={productData.product_image} alt={productData.product_image} /> : <img className="h-full w-full object-cover object-center lg:h-full lg:w-full" src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/No-Image-Placeholder.svg/1665px-No-Image-Placeholder.svg.png" alt="product" />}
+
+            <Link to={`/product/${productData.id}`}>
+              {productData.product_image ? <img className="mx-auto flex-shrink-0 " src={productData.product_image} alt={productData.product_image} /> : <img className="h-full w-full object-cover object-center lg:h-full lg:w-full" src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/No-Image-Placeholder.svg/1665px-No-Image-Placeholder.svg.png" alt="product" />}
+            </Link>
         </div>
         
         <div className="my-4 flex justify-between">

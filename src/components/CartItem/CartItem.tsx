@@ -1,14 +1,24 @@
 import React, { useEffect, useState } from 'react'
 import { CheckIcon, ClockIcon, QuestionMarkCircleIcon, XMarkIcon } from '@heroicons/react/20/solid'
 import { useSelector } from 'react-redux';
-import { randomNumber, shippingCost } from '../../helper/stringifyToJson'
+import { AppDispatch } from '../../store/index'
+import { randomNumber, shippingCost } from '../../helper/stringifyToJson';
+import { remove_cart_item } from '../../store/slices/ProductListSlice'
+import { useDispatch } from 'react-redux';
 
 const CartItem = () => {
     const [price, setPrice] = useState([]);
 
+    const dispacth = useDispatch<AppDispatch>();
+
     const cartItem = useSelector((state:any) => {
       return state.productData.cartItem;
     })
+
+    const removeCartItem = async(id:any) => {
+      alert(id)
+      dispacth(remove_cart_item(id))
+    }
 
     useEffect(() => {
       setPrice(cartItem.map((item:any) => {
@@ -43,7 +53,9 @@ const CartItem = () => {
             </h2>
             {cartItem.length === 0 ? (<h2 className='fs-5'>No Item found in the cart</h2>) : <ul className="divide-y divide-gray-200 border-b border-t border-gray-200">
               {cartItem.map((product:any) => {
+                console.log(product, 'product')
                 return product.map((item:any, productIdx:any) => {
+                  console.log(item, 'item')
                   return (
                     <li key={item.id} className="flex py-6 sm:py-10">
                       <div className="flex-shrink-0">
@@ -93,7 +105,7 @@ const CartItem = () => {
                             </select>
 
                             <div className="absolute right-0 top-0">
-                              <button type="button" className="-m-2 inline-flex p-2 text-gray-400 hover:text-gray-500">
+                              <button type="button" onClick={() =>removeCartItem(item.id)} className="-m-2 inline-flex p-2 text-gray-400 hover:text-gray-500">
                                 <span className="sr-only">Remove</span>
                                 <XMarkIcon className="h-5 w-5" aria-hidden="true" />
                               </button>

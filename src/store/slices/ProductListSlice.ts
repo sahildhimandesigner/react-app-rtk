@@ -20,8 +20,14 @@ const productSlice = createSlice({
     reducers: {
       addToCartItem: (state, action) => {
         state.cartItem.push(action.payload);
-        localStorage.setItem("cartItems", JSON.stringify(state.cartItem))
-      }
+        localStorage.setItem("cartItems", JSON.stringify(state.cartItem));
+      },
+      remove_cart_item: (state, action) => {
+        const idToRemove = action.payload;
+        const setRemovedCartItem = state.cartItem.filter(item => item.id !== idToRemove);
+        localStorage.setItem("cartItems", JSON.stringify(setRemovedCartItem));
+        state.cartItem = setRemovedCartItem;
+      },
     },
     extraReducers: (builder) => {
       builder
@@ -67,5 +73,5 @@ const productSlice = createSlice({
     },
 });
 
-export const { addToCartItem } = productSlice.actions;
+export const { addToCartItem, remove_cart_item } = productSlice.actions;
 export default productSlice.reducer;

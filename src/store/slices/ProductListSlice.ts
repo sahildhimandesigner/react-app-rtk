@@ -25,9 +25,8 @@ const productSlice = createSlice({
       },
       remove_cart_item: (state, action) => {
         const idToRemove = action.payload;
-        const setRemovedCartItem = state.cartItem.filter(item => item.id !== idToRemove);
-        localStorage.setItem("cartItems", JSON.stringify(setRemovedCartItem[0]));
-        state.cartItem = setRemovedCartItem;
+        state.cartItem.splice(idToRemove, 1);
+        localStorage.setItem("cartItems", JSON.stringify(state.cartItem));
       },
     },
     extraReducers: (builder) => {

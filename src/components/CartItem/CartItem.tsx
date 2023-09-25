@@ -39,7 +39,6 @@ const CartItem = () => {
 
     const order_total = sub_total + shippingCost + tax_estimation;
 
-  
   return (
     <div className="bg-white">
       <div className="mx-auto max-w-2xl px-4 pb-24 pt-16 sm:px-6 lg:max-w-7xl lg:px-8">
@@ -100,7 +99,7 @@ const CartItem = () => {
                             </select>
 
                             <div className="absolute right-0 top-0">
-                              <button type="button" onClick={() =>removeCartItem(product.id)} className="-m-2 inline-flex p-2 text-gray-400 hover:text-gray-500">
+                              <button type="button" onClick={() =>removeCartItem(productIdx)} className="-m-2 inline-flex p-2 text-gray-400 hover:text-gray-500">
                                 <span className="sr-only">Remove</span>
                                 <XMarkIcon className="h-5 w-5" aria-hidden="true" />
                               </button>

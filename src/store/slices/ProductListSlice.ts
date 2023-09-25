@@ -19,13 +19,14 @@ const productSlice = createSlice({
     } as ProductListType,
     reducers: {
       addToCartItem: (state, action) => {
+        console.log(action.payload)
         state.cartItem.push(action.payload);
         localStorage.setItem("cartItems", JSON.stringify(state.cartItem));
       },
       remove_cart_item: (state, action) => {
         const idToRemove = action.payload;
         const setRemovedCartItem = state.cartItem.filter(item => item.id !== idToRemove);
-        localStorage.setItem("cartItems", JSON.stringify(setRemovedCartItem));
+        localStorage.setItem("cartItems", JSON.stringify(setRemovedCartItem[0]));
         state.cartItem = setRemovedCartItem;
       },
     },

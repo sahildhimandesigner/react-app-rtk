@@ -32,7 +32,11 @@ const ProductListing = () => {
 
     const addToCart = (product_id:number) => {
         const filter_product = item.filter((items:any) => items.id === product_id);
-        dispatch(addToCartItem(filter_product));
+
+        if(filter_product.length) {
+            dispatch(addToCartItem(filter_product[0]));
+        }
+        
     }
 
   return (
